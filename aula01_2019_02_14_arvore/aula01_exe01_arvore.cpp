@@ -31,41 +31,43 @@ void inserir(cad *raiz) {
 		raiz -> prox = novo;
 	}
 
-	if(novo < raiz) {
+
+	if(novo < raiz) {		//add on left to the tree
 		cad *TEMP = raiz -> ant;
 
-		if(TEMP -> ant != NULL && novo < TEMP) {
-			TEMP = TEMP -> prox;
+		while(novo < TEMP && TEMP -> ant != NULL)) {
+			TEMP = TEMP -> ant;
 
-			
+			while(novo > TEMP && TEMP -> prox != NULL)) {
+				TEMP = TEMP -> prox;
+			}
 		}
 
-	}
-	else if(novo > raiz) {
-
-	}
-
-
-	else if(raiz -> ant != NULL && raiz < novo) {)
-		cad *TEMP = raiz -> ant;
-
-	else if(raiz -> prox ! NULL && raiz > novo) {
-		cad *TEMP = raiz -> ant;
-	}
-
-		if(TEMP -> ant == NULL && TEMP < raiz) {
-			TEMP -> ant == novo;
+		if(TEMP -> ant == NULL) {
+			TEMP -> ant = novo;
 		}
-		else if(TEMP -> prox == NULL && TEMP > raiz) {
-			TEMP -> prox == novo;
+		else if(TEMP -> prox == NULL) {
+			TEMP -> prox = novo;
+		}
+	}
+	else if(novo > raiz) {		//add on right to the tree
+		cad *TEMP = raiz -> prox;
+
+		while(novo < TEMP && TEMP -> ant != NULL)) {
+			TEMP = TEMP -> ant;
+
+			while(novo > TEMP && TEMP -> prox != NULL)) {
+				TEMP = TEMP -> prox;
+			}
 		}
 
-		// while(TEMP -> ant != NULL) {
-		// 	TEMP = TEMP -> ant;
-		// }
+		if(TEMP -> ant == NULL) {
+			TEMP -> ant = novo;
+		}
+		else if(TEMP -> prox == NULL) {
+			TEMP -> prox = novo;
+		}
 	}
-	
-
 }
 
 void menu(cad *raiz) {
