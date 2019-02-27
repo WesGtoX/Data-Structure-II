@@ -15,59 +15,85 @@ typedef struct cadastro cad;
 
 void inserir(cad *raiz) {
 	cad *novo = (cad *)malloc(sizeof(cad));
-
-	printf("Informe o valor: ");
-	scanf("%d", &novo -> valor);
-
+	
+	novo -> ant = NULL;
 	novo -> prox = NULL;
-
-	if(raiz == NULL) {
-		raiz = novo;
+	novo -> valor = NULL;
+	
+	if(raiz -> valor == NULL) {
+		printf("inserir raiz\n\n");
+		printf("Informe o valor: ");
+		scanf("%d", &raiz -> valor);
 	}
-	else if(raiz -> ant == NULL && raiz < novo) {
+	else {
+		printf("inserir novo\n\n");
+		printf("Informe o valor: ");
+		scanf("%d", &novo -> valor);
+		
+		printf("novo %i\n\n", novo -> valor);
+		system("pause");
+	}
+	
+	printf("raiz %i\n", raiz -> valor);
+	printf("raiz ant %i\n", raiz -> ant);
+	printf("raiz prox %i\n", raiz -> prox);
+	system("pause");
+
+	if(raiz -> ant == NULL && novo -> valor != NULL && novo < raiz) {
 		raiz -> ant = novo;
+		printf("OK-02\n\n");
+		
+		printf("raiz %i\n", raiz -> valor);
+		printf("raiz ant %i\n", raiz -> ant -> valor);
+		printf("raiz prox %i\n", raiz -> prox -> valor);
+		system("pause");
 	}
-	else if(raiz -> prox == NULL) {
+	else if(raiz -> prox == NULL && novo -> valor != NULL && novo > raiz) {
 		raiz -> prox = novo;
+		printf("OK-03\n\n");
+		
+		printf("raiz %i\n", raiz -> valor);
+		printf("raiz ant %i\n", raiz -> ant -> valor);
+		printf("raiz prox %i\n", raiz -> prox -> valor);
+		system("pause");
 	}
 
-
-	if(novo < raiz) {		//add on left to the tree
-		cad *TEMP = raiz -> ant;
-
-		while(novo < TEMP && TEMP -> ant != NULL)) {
-			TEMP = TEMP -> ant;
-
-			while(novo > TEMP && TEMP -> prox != NULL)) {
-				TEMP = TEMP -> prox;
-			}
-		}
-
-		if(TEMP -> ant == NULL) {
-			TEMP -> ant = novo;
-		}
-		else if(TEMP -> prox == NULL) {
-			TEMP -> prox = novo;
-		}
-	}
-	else if(novo > raiz) {		//add on right to the tree
-		cad *TEMP = raiz -> prox;
-
-		while(novo < TEMP && TEMP -> ant != NULL)) {
-			TEMP = TEMP -> ant;
-
-			while(novo > TEMP && TEMP -> prox != NULL)) {
-				TEMP = TEMP -> prox;
-			}
-		}
-
-		if(TEMP -> ant == NULL) {
-			TEMP -> ant = novo;
-		}
-		else if(TEMP -> prox == NULL) {
-			TEMP -> prox = novo;
-		}
-	}
+//	if(novo < raiz) {		//add on left to the tree
+//		cad *TEMP = raiz -> ant;
+//
+//		while(novo < TEMP && TEMP -> ant != NULL) {
+//			TEMP = TEMP -> ant;
+//
+//			while(novo > TEMP && TEMP -> prox != NULL) {
+//				TEMP = TEMP -> prox;
+//			}
+//		}
+//
+//		if(TEMP -> ant == NULL) {
+//			TEMP -> ant = novo;
+//		}
+//		else if(TEMP -> prox == NULL) {
+//			TEMP -> prox = novo;
+//		}
+//	}
+//	else if(novo > raiz) {		//add on right to the tree
+//		cad *TEMP = raiz -> prox;
+//
+//		while(novo < TEMP && TEMP -> ant != NULL) {
+//			TEMP = TEMP -> ant;
+//
+//			while(novo > TEMP && TEMP -> prox != NULL) {
+//				TEMP = TEMP -> prox;
+//			}
+//		}
+//
+//		if(TEMP -> ant == NULL) {
+//			TEMP -> ant = novo;
+//		}
+//		else if(TEMP -> prox == NULL) {
+//			TEMP -> prox = novo;
+//		}
+//	}
 }
 
 void menu(cad *raiz) {
@@ -106,7 +132,7 @@ void menu(cad *raiz) {
 				printf("::::::::::::::. IMPRIMIR TODOS .::::::::::::::\n");
 				printf("::::::::::::::::::::::::::::::::::::::::::::::\n\n");
 				
-				show_all(raiz);
+//				show_all(raiz);
 				break;
 			}
 			case 0 : {
@@ -130,5 +156,8 @@ int main() {
 	cad *raiz = (cad *)malloc(sizeof(cad));
 	raiz -> prox = NULL;
 	raiz -> ant = NULL;
+	raiz -> valor = NULL;
+	
+	menu(raiz);
 }
 
