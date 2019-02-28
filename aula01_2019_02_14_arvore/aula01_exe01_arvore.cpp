@@ -34,66 +34,73 @@ void inserir(cad *raiz) {
 		system("pause");
 	}
 	
-	printf("raiz %i\n", raiz -> valor);
-	printf("raiz ant %i\n", raiz -> ant);
-	printf("raiz prox %i\n", raiz -> prox);
+	printf("OK-01\n\n");									//================== PRINT TEST ==================
+	printf("raiz %i\n", raiz -> valor);						//================== PRINT TEST ==================
+//	printf("raiz ant %i\n", raiz -> ant -> valor);			//================== PRINT TEST ==================
+//	printf("raiz prox %i\n", raiz -> prox -> valor);		//================== PRINT TEST ==================
 	system("pause");
 
-	if(raiz -> ant == NULL && novo -> valor != NULL && novo < raiz) {
+	if(raiz -> ant == NULL && novo -> valor != NULL && novo -> valor < raiz -> valor) {
+		printf("novo %i\n", novo -> valor);
 		raiz -> ant = novo;
-		printf("OK-02\n\n");
+		printf("OK-02\n\n");		//================== PRINT TEST ==================
 		
-		printf("raiz %i\n", raiz -> valor);
-		printf("raiz ant %i\n", raiz -> ant -> valor);
-		printf("raiz prox %i\n", raiz -> prox -> valor);
+		printf("raiz %i\n", raiz -> valor);						//================== PRINT TEST ==================
+		printf("raiz ant %i\n", raiz -> ant -> valor);			//================== PRINT TEST ==================
+//		printf("raiz prox %i\n", raiz -> prox -> valor);		//================== PRINT TEST ==================
 		system("pause");
 	}
-	else if(raiz -> prox == NULL && novo -> valor != NULL && novo > raiz) {
+	else if(raiz -> prox == NULL && novo -> valor != NULL && novo -> valor > raiz -> valor) {
+		printf("novo %i\n", novo -> valor);
 		raiz -> prox = novo;
-		printf("OK-03\n\n");
+		printf("OK-03\n\n");		//================== PRINT TEST ==================
 		
-		printf("raiz %i\n", raiz -> valor);
-		printf("raiz ant %i\n", raiz -> ant -> valor);
-		printf("raiz prox %i\n", raiz -> prox -> valor);
+		printf("raiz %i\n", raiz -> valor);					//================== PRINT TEST ==================
+//		printf("raiz ant %i\n", raiz -> ant -> valor);		//================== PRINT TEST ==================
+		printf("raiz prox %i\n", raiz -> prox -> valor);	//================== PRINT TEST ==================
 		system("pause");
 	}
 
-//	if(novo < raiz) {		//add on left to the tree
-//		cad *TEMP = raiz -> ant;
-//
-//		while(novo < TEMP && TEMP -> ant != NULL) {
-//			TEMP = TEMP -> ant;
-//
-//			while(novo > TEMP && TEMP -> prox != NULL) {
-//				TEMP = TEMP -> prox;
-//			}
-//		}
-//
-//		if(TEMP -> ant == NULL) {
-//			TEMP -> ant = novo;
-//		}
-//		else if(TEMP -> prox == NULL) {
-//			TEMP -> prox = novo;
-//		}
-//	}
-//	else if(novo > raiz) {		//add on right to the tree
-//		cad *TEMP = raiz -> prox;
-//
-//		while(novo < TEMP && TEMP -> ant != NULL) {
-//			TEMP = TEMP -> ant;
-//
-//			while(novo > TEMP && TEMP -> prox != NULL) {
-//				TEMP = TEMP -> prox;
-//			}
-//		}
-//
-//		if(TEMP -> ant == NULL) {
-//			TEMP -> ant = novo;
-//		}
-//		else if(TEMP -> prox == NULL) {
-//			TEMP -> prox = novo;
-//		}
-//	}
+	if(novo -> valor < raiz -> valor && raiz -> ant != NULL) {		//add on left to the tree
+		printf("LOOP OK-01\n\n");		//================== PRINT TEST ==================
+		system("pause");
+		cad *TEMP = raiz -> ant;
+
+		while(novo < TEMP && TEMP -> ant != NULL) {
+			TEMP = TEMP -> ant;
+
+			while(novo > TEMP && TEMP -> prox != NULL) {
+				TEMP = TEMP -> prox;
+			}
+		}
+
+		if(TEMP -> ant == NULL) {
+			TEMP -> ant = novo;
+		}
+		else if(TEMP -> prox == NULL) {
+			TEMP -> prox = novo;
+		}
+	}
+	else if(novo -> valor > raiz -> valor && raiz -> prox != NULL) {		//add on right to the tree
+		printf("LOOP OK-02\n\n");		//================== PRINT TEST ==================
+		system("pause");
+		cad *TEMP = raiz -> prox;
+
+		while(novo < TEMP && TEMP -> ant != NULL) {
+			TEMP = TEMP -> ant;
+
+			while(novo > TEMP && TEMP -> prox != NULL) {
+				TEMP = TEMP -> prox;
+			}
+		}
+
+		if(TEMP -> ant == NULL) {
+			TEMP -> ant = novo;
+		}
+		else if(TEMP -> prox == NULL) {
+			TEMP -> prox = novo;
+		}
+	}
 }
 
 void menu(cad *raiz) {
