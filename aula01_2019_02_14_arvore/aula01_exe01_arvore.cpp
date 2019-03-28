@@ -13,9 +13,9 @@ struct cadastro {
 };
 typedef struct cadastro cad;
 
-//void imprimir(cad *raiz);
-
-void inserir(cad *raiz, int numero) {
+//INSERIR
+//void inserir(cad *raiz, int numero) {		// AUTO INSERT
+ void inserir(cad *raiz) {
 	cad *novo = (cad *)malloc(sizeof(cad));
 	
 	novo -> ant = NULL;
@@ -23,164 +23,182 @@ void inserir(cad *raiz, int numero) {
 	novo -> valor = NULL;
 	
 	if(raiz -> valor == NULL) {
-//		printf("\ninserir raiz\n");
-//		printf("Informe o valor: ");
-//		scanf("%d", &raiz -> valor);
-		raiz -> valor = numero;
-		
-//		printf("raiz %i\n\n", raiz -> valor);
+		printf("Informe o valor: ");
+		scanf("%d", &raiz -> valor);
+//		raiz -> valor = numero;				// AUTO INSERT
 	}
 	else {
-//		printf("\ninserir novo\n");
-//		printf("Informe o valor: ");
-//		scanf("%d", &novo -> valor);
-		novo -> valor = numero;
-		
-//		printf("novo %i\n\n", novo -> valor);
+		printf("Informe o valor: ");
+		scanf("%d", &novo -> valor);
+//		novo -> valor = numero;				// AUTO INSERT
 	}
-	
-//	printf("OK-01\n\n");									//================== PRINT TEST ==================
-//	printf("raiz %i\n", raiz -> valor);						//================== PRINT TEST ==================
-////	printf("raiz ant %i\n", raiz -> ant -> valor);			//================== PRINT TEST ==================
-////	printf("raiz prox %i\n", raiz -> prox -> valor);		//================== PRINT TEST ==================
-//	system("pause");
 
 	if(raiz -> ant == NULL && novo -> valor != NULL && novo -> valor < raiz -> valor) {
-//		printf("novo ESQ %i\n", novo -> valor);
 		raiz -> ant = novo;
-//		printf("OK-02\n\n");		//================== PRINT TEST ==================
-		
-//		printf("raiz %i\n", raiz -> valor);						//================== PRINT TEST ==================
-//		printf("raiz ant %i\n", raiz -> ant -> valor);			//================== PRINT TEST ==================
-////		printf("raiz prox %i\n", raiz -> prox -> valor);		//================== PRINT TEST ==================
-//		system("pause");
 	}
 	else if(raiz -> prox == NULL && novo -> valor != NULL && novo -> valor > raiz -> valor) {
-//		printf("novo DIR %i\n", novo -> valor);
 		raiz -> prox = novo;
-//		printf("OK-03\n\n");		//================== PRINT TEST ==================
-		
-//		printf("raiz %i\n", raiz -> valor);					//================== PRINT TEST ==================
-////		printf("raiz ant %i\n", raiz -> ant -> valor);		//================== PRINT TEST ==================
-//		printf("raiz prox %i\n", raiz -> prox -> valor);	//================== PRINT TEST ==================
-//		system("pause");
 	}
 	else if(novo -> valor < raiz -> valor && raiz -> ant != NULL) {		//add on left to the tree
-//		printf("LOOP OK-01\n\n");		//================== PRINT TEST ==================
-//		system("pause");
 		cad *TEMP = raiz -> ant;
-//		printf("TEMP %i ", TEMP -> valor);
-//		system("pause");
 
 		while(novo -> valor < TEMP -> valor && TEMP -> ant != NULL) {
-//			printf("LOOP OK-01-02\n\n");		//================== PRINT TEST ==================
-//			system("pause");
-//			printf("ANTES %i ", TEMP -> valor);
-//			system("pause");
 			TEMP = TEMP -> ant;
-//			printf("DEPOIS %i\n", TEMP -> valor);
-//			system("pause");
-
+			
 			while(novo -> valor > TEMP -> valor && TEMP -> prox != NULL) {
-//				printf("LOOP OK-01-03\n\n");		//================== PRINT TEST ==================
-//				system("pause");
-//				printf("ANTES %i ", TEMP -> valor);
-//				system("pause");
 				TEMP = TEMP -> prox;
-//				printf("DEPOIS %i\n", TEMP -> valor);
-//				system("pause");
+			}
+		}
+		
+		while(novo -> valor > TEMP -> valor && TEMP -> prox != NULL) {
+			TEMP = TEMP -> prox;
+			
+			while(novo -> valor < TEMP -> valor && TEMP -> ant != NULL) {
+				TEMP = TEMP -> ant;
 			}
 		}
 
-		if(TEMP -> ant == NULL) {
-//			printf("IF OK\n\n");		//================== PRINT TEST ==================
-//			system("pause");
-//			printf("ANTES %i ", TEMP -> valor);
+		if(TEMP -> ant == NULL && novo -> valor < TEMP -> valor) {
 			TEMP -> ant = novo;
-//			printf("DEPOIS %i\n", TEMP -> ant -> valor);
 		}
-		else if(TEMP -> prox == NULL) {
-//			printf("ELSE OK\n\n");		//================== PRINT TEST ==================
-//			system("pause");
-//			printf("ANTES %i ", TEMP -> valor);
-//			system("pause");
+		else if(TEMP -> prox == NULL && novo -> valor > TEMP -> valor) {
 			TEMP -> prox = novo;
-//			printf("DEPOIS %i\n", TEMP -> prox -> valor);
-//			system("pause");
 		}
 	}
 	else if(novo -> valor > raiz -> valor && raiz -> prox != NULL) {		//add on right to the tree
-//		printf("LOOP OK-02\n\n");		//================== PRINT TEST ==================
-//		system("pause");
 		cad *TEMP = raiz -> prox;
-//		printf("TEMP %i ", TEMP -> valor);
-//		system("pause");
-
+		
 		while(novo -> valor < TEMP -> valor && TEMP -> ant != NULL) {
-//			printf("LOOP OK-02-02\n\n");		//================== PRINT TEST ==================
-//			system("pause");
-//			printf("ANTES %i ", TEMP -> valor);
-//			system("pause");
 			TEMP = TEMP -> ant;
-//			printf("DEPOIS %i\n", TEMP -> valor);
-//			system("pause");
-
+			
 			while(novo -> valor > TEMP -> valor && TEMP -> prox != NULL) {
-//				printf("LOOP OK-02-03\n\n");		//================== PRINT TEST ==================
-//				system("pause");
-//				printf("ANTES %i ", TEMP -> valor);
-//				system("pause");
 				TEMP = TEMP -> prox;
-//				printf("DEPOIS %i\n", TEMP -> valor);
-//				system("pause");
+			}
+		}
+		
+		while(novo -> valor > TEMP -> valor && TEMP -> prox != NULL) {
+			TEMP = TEMP -> prox;
+			
+			while(novo -> valor < TEMP -> valor && TEMP -> ant != NULL) {
+				TEMP = TEMP -> ant;
 			}
 		}
 
-		if(TEMP -> ant == NULL) {
-//			printf("IF OK\n\n");		//================== PRINT TEST ==================
-//			system("pause");
-//			printf("ANTES %i ", TEMP -> valor);
+		if(TEMP -> ant == NULL && novo -> valor < TEMP -> valor) {
 			TEMP -> ant = novo;
-//			printf("DEPOIS %i\n", TEMP -> ant -> valor);
 		}
-		else if(TEMP -> prox == NULL) {
-//			printf("ELSE OK\n\n");		//================== PRINT TEST ==================
-//			system("pause");
-//			printf("ANTES %i ", TEMP -> valor);
+		else if(TEMP -> prox == NULL && novo -> valor > TEMP -> valor) {
 			TEMP -> prox = novo;
-//			printf("DEPOIS %i\n", TEMP -> prox -> valor);
-//			system("pause");
 		}
 	}
-	
-//	system("pause");
 }
 
-void show_all(cad *raiz) {
+//INSERIR RECURSIVO
+void inserir_recursive(cad *raiz, int valor) {
+	cad *novo = (cad *)malloc(sizeof(cad));
+	novo -> ant = NULL;
+	novo -> prox = NULL;
+	novo -> valor = valor;
 	
+	if(raiz -> valor == NULL) {
+		raiz -> valor = valor;
+	}
+	else {
+		if(raiz -> valor > valor && raiz -> ant == NULL) {
+			raiz -> ant = novo;
+		}
+		else if(raiz -> valor > valor && raiz -> ant != NULL) {
+			inserir_recursive(raiz -> ant, valor);
+		}
+		else if(raiz -> valor < valor && raiz -> prox == NULL) {
+			raiz -> prox = novo;
+		}
+		else if(raiz -> valor < valor && raiz -> prox != NULL) {
+			inserir_recursive(raiz -> prox, valor);
+		}
+	}
+}
+
+//IMPRIMIR EM ORDEM
+void show_ordem_recursive(cad *raiz) {
+	cad *RAIZT = (cad *)malloc(sizeof(cad));
+	RAIZT = raiz;
+
+    if(RAIZT != NULL){
+        show_ordem_recursive(RAIZT -> ant);
+        printf("%i ", RAIZT -> valor);
+        
+        show_ordem_recursive(RAIZT -> prox);
+    }
+}
+
+//IMPRIMIR EM PRÉ-ORDEM
+void show_preordem_recursive(cad *raiz) {
+	cad *RAIZT = (cad *)malloc(sizeof(cad));
+	RAIZT = raiz;
+
+    if(RAIZT != NULL){
+        printf("%i ", RAIZT -> valor);
+        show_preordem_recursive(RAIZT -> ant);        
+        show_preordem_recursive(RAIZT -> prox);
+    }
+}
+//IMPRIMIR EM PÓS-ORDEM
+void show_posordem_recursive(cad *raiz) {
+	cad *RAIZT = (cad *)malloc(sizeof(cad));
+	RAIZT = raiz;
+
+    if(RAIZT != NULL){
+        show_posordem_recursive(RAIZT -> ant);
+        show_posordem_recursive(RAIZT -> prox);
+        printf("%i ", RAIZT -> valor);
+    }
+}
+
+//REMOVER
+void delete_raiz(cad *raiz, int valor) {
+	cad *TEMP1;
+	cad *TEMP2;
 	cad *RAIZT = (cad *)malloc(sizeof(cad));
 	RAIZT = raiz;
 	
-		
-	if(RAIZT -> ant != NULL) {
-		show_all(RAIZT -> ant);
+	if(RAIZT != NULL) {
+		if(valor == raiz -> valor) {
+			
+			
+		}
+		else if(valor < raiz -> valor) {
+			cad *TEMP;
+			TEMP = raiz -> ant;
+			delete_raiz(raiz -> ant, valor);
+			
+		}
+		else if(valor > raiz -> valor){
+			
+		}
 	}
-	else {
-		printf("%i ", RAIZT -> valor);
-	}
-	
-	
-	if(RAIZT -> prox != NULL) {
-		printf("%i ", RAIZT -> valor);
-		show_all(RAIZT -> prox);
-	}
-//	else {
-//		printf("%i ", RAIZT -> valor);
-//	}
+
+
+     {
+        if(RAIZT -> valor == valor) {
+        	TEMP1 = RAIZT -> ant;
+        	TEMP2 = RAIZT -> prox;
+        	TEMP2 -> prox -> ant = TEMP2 -> ant;
+        	TEMP2 -> ant = RAIZT -> ant;
+        	raiz = TEMP2;
+        	free(RAIZT);
+		}
+		else {
+			TEMP1 = RAIZT -> ant;
+			show_ordem_recursive(RAIZT -> ant);
+		}
+		TEMP1 -> ant;
+    }
+show_ordem_recursive(RAIZT -> prox);
 }
 
 void menu(cad *raiz) {
-	int opcao, i=0;
+	int opcao, i=0, valor;
 	
 	system("cls");
 	
@@ -191,7 +209,11 @@ void menu(cad *raiz) {
 		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
 		
 		printf("\n1 - Inserir");
-		printf("\n2 - Imprimir Todos");
+		printf("\n2 - Inserir Recursivo");
+		printf("\n3 - Imprimir Ordem Recursivo");
+		printf("\n4 - Imprimir Pre-Ordem Recursivo");
+		printf("\n5 - Imprimir Pos-Ordem Recursivo");
+		printf("\n6 - Remover");
 		printf("\n0 - Sair");
 		
 		printf("\n\nEscolha uma opcao: ");
@@ -202,37 +224,113 @@ void menu(cad *raiz) {
 				//inserir fim
 				system("cls");
 				printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-				printf(":::::::::::::. INSERIR NO INICIO .::::::::::::\n");
+				printf("::::::::::::::::::. INSERIR .:::::::::::::::::\n");
 				printf("::::::::::::::::::::::::::::::::::::::::::::::\n\n");
 				
-//				inserir(raiz);
-				inserir(raiz, 5);
-				inserir(raiz, 2);
-				inserir(raiz, 1);
-				inserir(raiz, 3);
-				inserir(raiz, 4);
-				inserir(raiz, 8);
-				inserir(raiz, 7);
-				inserir(raiz, 6);
-				inserir(raiz, 9);
-				inserir(raiz, 10);
-//				inserir(raiz, 43);
-//				inserir(raiz, 32);
-//				inserir(raiz, 29);
-//				inserir(raiz, 36);
-//				inserir(raiz, 3);
+				inserir(raiz);
+				
+//				inserir(raiz, 0);		// AUTO INSERT
+
+				system("pause");
 				break;
 			}
 			case 2 : {
-				//imprimir todos
+				//inserir recursivo
 				system("cls");
 				printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-				printf("::::::::::::::. IMPRIMIR TODOS .::::::::::::::\n");
+				printf(":::::::::::::. INSERIR RECURSIVO .::::::::::::\n");
 				printf("::::::::::::::::::::::::::::::::::::::::::::::\n\n");
 				
-				show_all(raiz);
+//				printf("Informe o valor: ");
+//				scanf("%d", &valor);
+//				
+//				inserir_recursive(raiz, valor);
+
+				// AUTO INSERT
+//				inserir_recursive(raiz, 10);
+//				inserir_recursive(raiz, 5);
+//				inserir_recursive(raiz, 4);
+//				inserir_recursive(raiz, 2);
+//				inserir_recursive(raiz, 1);
+//				inserir_recursive(raiz, 3);
+//				inserir_recursive(raiz, 6);
+//				inserir_recursive(raiz, 8);
+//				inserir_recursive(raiz, 7);
+//				inserir_recursive(raiz, 9);
+//				inserir_recursive(raiz, 15);
+//				inserir_recursive(raiz, 14);
+//				inserir_recursive(raiz, 12);
+//				inserir_recursive(raiz, 11);
+//				inserir_recursive(raiz, 13);
+//				inserir_recursive(raiz, 16);
+//				inserir_recursive(raiz, 18);
+//				inserir_recursive(raiz, 17);
+//				inserir_recursive(raiz, 19);
+
+				inserir_recursive(raiz, 10);
+				inserir_recursive(raiz, 5);
+				inserir_recursive(raiz, 3);
+				inserir_recursive(raiz, 2);
+				inserir_recursive(raiz, 4);
+				inserir_recursive(raiz, 1);
+				inserir_recursive(raiz, 15);
+				inserir_recursive(raiz, 17);
+				inserir_recursive(raiz, 16);
+				inserir_recursive(raiz, 18);
+				inserir_recursive(raiz, 19);
+				break;
+			}
+			case 3 : {
+				//imprimir todos
+				system("cls");
+				printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf("::::::::::::::. IMPRIMIR ORDEM RECURSIVO .::::::::::::::\n");
+				printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n\n");
+				
+				show_ordem_recursive(raiz);
 				printf("\n\n");
 				system("pause");
+				break;
+			}
+			case 4 : {
+				//imprimir todos
+				system("cls");
+				printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf("::::::::::::::. IMPRIMIR PRE-ORDEM RECURSIVO .::::::::::::::\n");
+				printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n\n");
+				
+				show_preordem_recursive(raiz);
+				printf("\n\n");
+				system("pause");
+				break;
+			}
+			case 5 : {
+				//imprimir todos
+				system("cls");
+				printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf("::::::::::::::. IMPRIMIR POS-ORDEM RECURSIVO .::::::::::::::\n");
+				printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n\n");
+				
+				show_posordem_recursive(raiz);
+				printf("\n\n");
+				system("pause");
+				break;
+			}
+			case 6 : {
+				//deletar
+				system("cls");
+				printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf("::::::::::::::::::. DELETAR .:::::::::::::::::\n");
+				printf("::::::::::::::::::::::::::::::::::::::::::::::\n\n");
+				
+				show_ordem_recursive(raiz);
+				
+				int valor;
+				
+				printf("\n\nDigite o valor que deseja deletar: ");
+				scanf("%i", valor);
+				
+				delete_raiz(raiz, valor);
 				break;
 			}
 			case 0 : {
