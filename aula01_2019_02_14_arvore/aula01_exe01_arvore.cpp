@@ -143,6 +143,7 @@ void show_preordem_recursive(cad *raiz) {
         show_preordem_recursive(RAIZT -> prox);
     }
 }
+
 //IMPRIMIR EM PÓS-ORDEM
 void show_posordem_recursive(cad *raiz) {
 	cad *RAIZT = (cad *)malloc(sizeof(cad));
@@ -197,6 +198,45 @@ void delete_raiz(cad *raiz, int valor) {
 show_ordem_recursive(RAIZT -> prox);
 }
 
+//TRABALHO ED II - JOSE FERREIRA - IMPRIMIR NOS DO TIPO RAIZ
+void imprimir_nos_tipo_raiz(cad *raiz) {
+	cad *RAIZT = (cad *)malloc(sizeof(cad));
+	RAIZT = raiz;
+
+    if(RAIZT != NULL){
+        imprimir_nos_tipo_raiz(RAIZT -> ant);
+        
+		if(RAIZT -> ant != NULL && RAIZT -> prox != NULL) {
+			printf("Raiz %i \n", RAIZT -> valor);	
+		}
+        
+        imprimir_nos_tipo_raiz(RAIZT -> prox);
+    }
+}
+
+//TRABALHO ED II - JOSE FERREIRA - NUMERO E SEU DOBRO
+int imprimir_numero_e_dobro(cad *raiz, int numero, int dobro, int n) {
+	cad *RAIZT = (cad *)malloc(sizeof(cad));
+	RAIZT = raiz;
+
+    if(RAIZT != NULL){
+        n = imprimir_numero_e_dobro(RAIZT -> ant, numero, dobro, n);
+        if(RAIZT -> valor == numero) {
+//        	printf("\nO numero informado ( %i ) consta na arvore\n", numero);
+        	n = 1;
+		}
+		
+	    if(RAIZT -> valor == dobro) {
+//	    	printf("O DOBRO ( %i ) do numero informado ( %i ) consta na arvore", dobro, dobro / 2);
+	    	n = 2;
+		}
+        
+        n = imprimir_numero_e_dobro(RAIZT -> prox, numero, dobro, n);
+    }
+    
+    return n;
+}
+
 void menu(cad *raiz) {
 	int opcao, i=0, valor;
 	
@@ -213,6 +253,9 @@ void menu(cad *raiz) {
 		printf("\n3 - Imprimir Ordem Recursivo");
 		printf("\n4 - Imprimir Pre-Ordem Recursivo");
 		printf("\n5 - Imprimir Pos-Ordem Recursivo");
+		printf("\n6 - Remover");
+		printf("\n7 - TRABALHO ED II - JOSE FERREIRA - IMPRIMIR NOS DO TIPO RAIZ");
+		printf("\n8 - TRABALHO ED II - JOSE FERREIRA - NUMERO E SEU DOBRO");
 		printf("\n6 - Remover");
 		printf("\n0 - Sair");
 		
@@ -247,37 +290,23 @@ void menu(cad *raiz) {
 //				inserir_recursive(raiz, valor);
 
 				// AUTO INSERT
-//				inserir_recursive(raiz, 10);
-//				inserir_recursive(raiz, 5);
-//				inserir_recursive(raiz, 4);
-//				inserir_recursive(raiz, 2);
-//				inserir_recursive(raiz, 1);
-//				inserir_recursive(raiz, 3);
-//				inserir_recursive(raiz, 6);
-//				inserir_recursive(raiz, 8);
-//				inserir_recursive(raiz, 7);
-//				inserir_recursive(raiz, 9);
-//				inserir_recursive(raiz, 15);
-//				inserir_recursive(raiz, 14);
-//				inserir_recursive(raiz, 12);
-//				inserir_recursive(raiz, 11);
-//				inserir_recursive(raiz, 13);
-//				inserir_recursive(raiz, 16);
-//				inserir_recursive(raiz, 18);
-//				inserir_recursive(raiz, 17);
-//				inserir_recursive(raiz, 19);
-
-				inserir_recursive(raiz, 10);
+				inserir_recursive(raiz, 11);
+				inserir_recursive(raiz, 6);
 				inserir_recursive(raiz, 5);
-				inserir_recursive(raiz, 3);
 				inserir_recursive(raiz, 2);
-				inserir_recursive(raiz, 4);
-				inserir_recursive(raiz, 1);
-				inserir_recursive(raiz, 15);
-				inserir_recursive(raiz, 17);
-				inserir_recursive(raiz, 16);
 				inserir_recursive(raiz, 18);
-				inserir_recursive(raiz, 19);
+				inserir_recursive(raiz, 10);
+				inserir_recursive(raiz, 9);
+				inserir_recursive(raiz, 17);
+				inserir_recursive(raiz, 8);
+				inserir_recursive(raiz, 4);
+				inserir_recursive(raiz, 13);
+				inserir_recursive(raiz, 1);
+				inserir_recursive(raiz, 3);
+				inserir_recursive(raiz, 7);
+				inserir_recursive(raiz, 12);
+				inserir_recursive(raiz, 15);
+
 				break;
 			}
 			case 3 : {
@@ -331,6 +360,47 @@ void menu(cad *raiz) {
 				scanf("%i", valor);
 				
 				delete_raiz(raiz, valor);
+				break;
+			}
+			case 7 : {
+				system("cls");
+				printf(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf("::::::::::::::::::. TRABALHO ED II - JOSE FERREIRA - IMPRIMIR NOS DO TIPO RAIZ .:::::::::::::::::\n");
+				printf(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n\n");
+				
+				imprimir_nos_tipo_raiz(raiz);
+				printf("\n\n");
+				system("pause");
+				
+				break;
+			}
+			case 8 : {
+				system("cls");
+				printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf("::::::::::::::::::. TRABALHO ED II - JOSE FERREIRA - NUMERO E SEU DOBRO .:::::::::::::::::\n");
+				printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n\n");
+				
+				int numero, dobro, n=0, nd=0;
+				
+				printf("Informe o numero: ");
+				scanf("%d", &numero);
+				
+				dobro = numero * 2;
+				
+				n = imprimir_numero_e_dobro(raiz, numero, dobro, n);
+				if(n == 1) {
+					printf("\nO numero informado ( %i ) consta na arvore, mas seu dobro ( %i ) NAO consta!\n", numero, dobro);
+				}
+				else if(n == 2) {
+					printf("\nO numero informado ( %i ) e seu dobro ( %i ) CONSTAM na arvore!\n", numero, dobro);
+				}
+				else {
+					printf("\nO numero informado ( %i ) NAO consta na arvore!\n", numero);
+				}
+				
+				printf("\n\n");
+				system("pause");
+				
 				break;
 			}
 			case 0 : {
