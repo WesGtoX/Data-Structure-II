@@ -10,55 +10,102 @@ struct cadastro {
 	struct cadastro *ant;
 //	int valor;
 	char name[50];
+	int dado[5];
 };
 typedef struct cadastro cad;
 
+//struct tablehash {
+//	struct tablehash *prox;
+//};
+//typedef struct tablehash hash[5];
+
 //INSERIR RECURSIVO
 //void inserir_recursive(cad *raiz, int valor, char name) {
-void inserir_recursive(cad *raiz, char name[50]) {
+void inserir_recursive(cad *raiz, cad *HASH, char name[50]) {
 	cad *novo = (cad *)malloc(sizeof(cad));
 	novo -> ant = NULL;
 	novo -> prox = NULL;
 //	novo -> valor = valor;
 	strcpy(novo -> name, name);
-	
+
 	if(strcmp(raiz -> name, "") == 0) {
 		strcpy(raiz -> name, name);
+		raiz = &HASH[0];
 	}
 	else {
 		if(strcmp(raiz -> name, name) > 0 && raiz -> ant == NULL) {
 			raiz -> ant = novo;
 		}
 		else if(strcmp(raiz -> name, name) > 0 && raiz -> ant != NULL) {
-			inserir_recursive(raiz -> ant, name);
+			inserir_recursive(raiz -> ant, HASH, name);
 		}
 		else if(strcmp(raiz -> name, name) < 0 && raiz -> prox == NULL) {
 			raiz -> prox = novo;
 		}
 		else if(strcmp(raiz -> name, name) < 0 && raiz -> prox != NULL) {
-			inserir_recursive(raiz -> prox, name);
+			inserir_recursive(raiz -> prox, HASH, name);
 		}
 	}
 }
 
-void hash_table() {
+void hash_table(cad *raiz, cad *HASH, char name[50]) {
+	//	65 66 67 68 69
+	//	70 71 72 73 74
+	//	75 76 77 78 79
+	//	80 81 82 83 84
+	//	85 86 87 88 89 90
+	
+	if((name[0]) <= 69) {
+		inserir_recursive(raiz, HASH, name);
+	}
+	else if((name[0]) <= 74) {
+		inserir_recursive(raiz, HASH, name);
+	}
+	else if((name[0]) <= 79) {
+		inserir_recursive(raiz, HASH, name);
+	}
+	else if((name[0]) <= 84) {
+		inserir_recursive(raiz, HASH, name);
+	}
+	else if((name[0]) <= 90) {
+		inserir_recursive(raiz, HASH, name);
+	}
 	
 }
 
 //IMPRIMIR EM ORDEM
-void show_ordem_recursive(cad *raiz) {
-	cad *RAIZT = (cad *)malloc(sizeof(cad));
-	RAIZT = raiz;
+void show_ordem_recursive(cad *raiz, cad *HASH) {
+//	cad *RAIZT = (cad *)malloc(sizeof(cad));
+//	RAIZT = raiz;
+	cad *RAIZT = &HASH[0];
+	
+//	printf("%s ", RAIZT -> name);
+	printf("\nRAIZT = HASH\n");
+	system("pause");
+	
+	while (RAIZT != NULL) {
+		printf("\nENTROU NO LOOP\n");
+		system("pause");
+		RAIZT = RAIZT -> prox;
+		printf("%s ", RAIZT -> name);
+		printf("\nLOOP\n");
+		system("pause");		printf("%s ", RAIZT -> name);
+		RAIZT = RAIZT -> prox;
+	
+	printf("\nSAIU DO LOOP\n");
+	system("pause");}
+	
 
-    if(RAIZT != NULL){
-        show_ordem_recursive(RAIZT -> ant);
-        printf("%s ", RAIZT -> name);
-        
-        show_ordem_recursive(RAIZT -> prox);
-    }
+//    if(RAIZT != NULL){
+//        show_ordem_recursive(RAIZT -> ant);
+//        printf("%s ", RAIZT -> name);
+//        
+//     
+	system("pause");
+//    }
 }
 
-void menu(cad *raiz) {
+void menu(cad *raiz, cad *HASH) {
 	int opcao, i=0;
 	char name[50];
 	
@@ -85,24 +132,24 @@ void menu(cad *raiz) {
 				printf(":::::::::::::. INSERIR RECURSIVO .::::::::::::\n");
 				printf("::::::::::::::::::::::::::::::::::::::::::::::\n\n");
 				
-//				printf("Informe o nome: ");
+				printf("Informe o nome: ");
 ////				scanf("%d", &valor);
-//				fflush(stdin);
-//				gets(name);
+				fflush(stdin);
+				gets(name);
 //				
-//				inserir_recursive(raiz, name);
+				inserir_recursive(raiz, HASH, name);
 				
 				// AUTO INSERT
-				inserir_recursive(raiz, "Sophia");
-				inserir_recursive(raiz, "Helena");
-				inserir_recursive(raiz, "Valentina");
-				inserir_recursive(raiz, "Laura");
-				inserir_recursive(raiz, "Alice");
-				inserir_recursive(raiz, "Isabella");
-				inserir_recursive(raiz, "Manuela");
-				inserir_recursive(raiz, "Julia");
-				inserir_recursive(raiz, "Heloisa");
-				inserir_recursive(raiz, "Luiza");
+//				inserir_recursive(raiz, HASH, "Sophia");
+//				inserir_recursive(raiz, HASH, "Helena");
+//				inserir_recursive(raiz, HASH, "Valentina");
+//				inserir_recursive(raiz, HASH, "Laura");
+//				inserir_recursive(raiz, HASH, "Alice");
+//				inserir_recursive(raiz, hash, "Isabella");
+//				inserir_recursive(raiz, hash, "Manuela");
+//				inserir_recursive(raiz, hash, "Julia");
+//				inserir_recursive(raiz, hash, "Heloisa");
+//				inserir_recursive(raiz, hash, "Luiza");
 				break;
 			}
 			case 2 : {
@@ -112,7 +159,7 @@ void menu(cad *raiz) {
 				printf("::::::::::::::. IMPRIMIR ORDEM RECURSIVO .::::::::::::::\n");
 				printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n\n");
 				
-				show_ordem_recursive(raiz);
+				show_ordem_recursive(raiz, HASH);
 				printf("\n\n");
 				system("pause");
 				break;
@@ -140,6 +187,27 @@ int main() {
 	raiz -> ant = NULL;
 	strcpy(raiz -> name, "");
 	
-	menu(raiz);
+	int vet[5] = {0,1,2,3,4};
+	
+	cad *HASH[5];
+	
+	HASH[0] = NULL;
+	HASH[1] = NULL;
+	HASH[2] = NULL;
+	HASH[3] = NULL;
+	HASH[4] = NULL;
+	
+//	int *hash;
+	
+//	vet = &HASH[0];
+	
+//	cad *hash[0] = (cad *)malloc(sizeof(cad));
+//	*dado = vet;
+//	hash[0] -> prox = vet[0];
+	
+//	printf("%i", HASH[0]);
+	
+	
+	menu(raiz, *HASH);
 }
 
