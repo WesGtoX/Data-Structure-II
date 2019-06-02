@@ -132,7 +132,7 @@ void show_ordem_recursive(cad *raiz) {
     }
 }
 
-//IMPRIMIR EM PRÉ-ORDEM
+//IMPRIMIR EM PRï¿½-ORDEM
 void show_preordem_recursive(cad *raiz) {
 	cad *RAIZT = (cad *)malloc(sizeof(cad));
 	RAIZT = raiz;
@@ -144,7 +144,7 @@ void show_preordem_recursive(cad *raiz) {
     }
 }
 
-//IMPRIMIR EM PÓS-ORDEM
+//IMPRIMIR EM Pï¿½S-ORDEM
 void show_posordem_recursive(cad *raiz) {
 	cad *RAIZT = (cad *)malloc(sizeof(cad));
 	RAIZT = raiz;
