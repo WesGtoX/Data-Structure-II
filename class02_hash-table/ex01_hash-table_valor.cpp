@@ -31,32 +31,32 @@ void initialize_hash(cad *HASH[MAX]) {
 //INSERIR RECURSIVO
 //void inserir_recursive(cad *raiz, int valor, char name) {
 void inserir_recursive(cad *raiz, int valor) {
-	printf("\nENTROU NO INSERIR\n");
-	system("pause");
+	// printf("\nENTROU NO INSERIR\n");
+	// system("pause");
 	
 	cad *novo = (cad *)malloc(sizeof(cad));
 	novo -> ant = NULL;
 	novo -> prox = NULL;
 	novo -> valor = valor;
 	
-	printf("\nNOVO -> valor = %d\n", novo -> valor);
-	system("pause");
+	// printf("\nNOVO -> valor = %d\n", novo -> valor);
+	// system("pause");
 	
-	printf("\nvalor = %d\n", valor);
-	system("pause");
+	// printf("\nvalor = %d\n", valor);
+	// system("pause");
 	
 //	printf("\nraiz -> valor = %d\n", raiz -> valor);
 //	system("pause");
 	
 	if(raiz -> valor == NULL) {
-		printf("\nENTROU NO IF\n");
-		system("pause");
+		// printf("\nENTROU NO IF\n");
+		// system("pause");
 		
 		raiz -> valor = valor;
-		printf("\nraiz -> name = %d\n", raiz -> valor);
+		// printf("\nraiz -> name = %d\n", raiz -> valor);
 		
-		printf("\nSAIU DO IF\n");
-		system("pause");
+		// printf("\nSAIU DO IF\n");
+		// system("pause");
 	}
 	else {
 		if(raiz -> valor > valor && raiz -> ant == NULL) {
@@ -98,8 +98,8 @@ void hash_table(cad *HASH[MAX], int valor) {
 //	system("pause");
 	
 	if(HASH[i] -> prox == NULL) {
-		printf("\nENTROU NO IF\n");
-		system("pause");
+		// printf("\nENTROU NO IF\n");
+		// system("pause");
 		
 		raiz -> prox = NULL;
 		raiz -> ant = NULL;
@@ -112,11 +112,11 @@ void hash_table(cad *HASH[MAX], int valor) {
 //		printf("\n\nname = %s\n\n", nome);
 //		system("pause");
 //				
-		printf("\nraiz -> prox = %i\n", raiz -> prox);
-		printf("\nraiz -> ant = %i\n", raiz -> ant);
-		printf("\nraiz -> valor = %i\n", raiz -> valor);
-		printf("\nSAIU DO IF\n");
-		system("pause");
+		// printf("\nraiz -> prox = %i\n", raiz -> prox);
+		// printf("\nraiz -> ant = %i\n", raiz -> ant);
+		// printf("\nraiz -> valor = %i\n", raiz -> valor);
+		// printf("\nSAIU DO IF\n");
+		// system("pause");
 	}
 	else {
 		cad *raiz = (cad *)malloc(sizeof(cad));
