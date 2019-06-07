@@ -37,27 +37,27 @@ int calculate_hash(int value) {
 }
 
 //INSERIR RECURSIVO
-void inserir_recursive(cad *raiz, int valor) {
+void inserir_recursive(cad *raiz, int value) {
 	cad *novo = (cad *)malloc(sizeof(cad));
 	novo -> ant = NULL;
 	novo -> prox = NULL;
-	novo -> valor = valor;
+	novo -> valor = value;
 	
 	if(raiz -> valor == NULL) {
-		raiz -> valor = valor;
+		raiz -> valor = value;
 	}
 	else {
-		if(raiz -> valor > valor && raiz -> ant == NULL) {
+		if(raiz -> valor > value && raiz -> ant == NULL) {
 			raiz -> ant = novo;
 		}
-		else if(raiz -> valor > valor && raiz -> ant != NULL) {
-			inserir_recursive(raiz -> ant, valor);
+		else if(raiz -> valor > value && raiz -> ant != NULL) {
+			inserir_recursive(raiz -> ant, value);
 		}
-		else if(raiz -> valor < valor && raiz -> prox == NULL) {
+		else if(raiz -> valor < value && raiz -> prox == NULL) {
 			raiz -> prox = novo;
 		}
-		else if(raiz -> valor < valor && raiz -> prox != NULL) {
-			inserir_recursive(raiz -> prox, valor);
+		else if(raiz -> valor < value && raiz -> prox != NULL) {
+			inserir_recursive(raiz -> prox, value);
 		}
 	}
 }
@@ -95,6 +95,17 @@ void show_ordem_recursive(cad *raiz) {
     }
 }
 
+//FUNCÇÃO DE TESTES
+void tests_functions(cad *HASH[MAX], int tests[]) {
+    int j;
+    int k = sizeof(tests);
+    printf("\n\n%i\n\n",k);
+    for(int i=0; i < sizeof(tests); i++) {
+        j = tests[i];
+        hash_table(HASH, tests[i]);
+    }
+}
+
 void menu(cad *HASH[MAX]) {
 	int opcao, i=0;
 	int valor;
@@ -110,6 +121,7 @@ void menu(cad *HASH[MAX]) {
 		
 		printf("\n1 - Inserir Recursivo");
 		printf("\n2 - Imprimir Ordem Recursivo");
+        printf("\n3 - Testes de valores predefinido");
 		printf("\n0 - Sair");
 		
 		printf("\n\nEscolha uma opcao: ");
@@ -153,6 +165,59 @@ void menu(cad *HASH[MAX]) {
 				printf("\n\n");
 				system("pause");
 				break;
+			}
+			case 3 : {
+			    int opcao2;
+
+                //testes
+                system("cls");
+                printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
+                printf("::::::::::::::::::. VALORES DE TESTES .:::::::::::::::::\n");
+                printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n\n");
+
+                printf("\n1 - Teste 1 = (18 | 4  |  8 |  1 |   3 |  7 |  12 |  15 | 11 |  6 |   5 |   2 | 13 |  10 |  9 | 17)");
+                printf("\n2 - Teste 2 = (84 | 13 |  1 |  3 |   7 | 12 |  15 |  11 |  6 |  5 |   2 |  18 | 10 |   9 | 17)");
+                printf("\n3 - Teste 3 = (75 | 93 | 77 |  3 |  39 | 14 | 775 |  12 |  1 | 73 | 377 |   2 | 95 |  53)");
+                printf("\n4 - Teste 4 = (79 | 78 | 18 |  1 | 797 | 98 |   3 |  79 | 21 | 97 |   2 |  25 | 49 | 897)");
+                printf("\n5 - Teste 5 = (81 | 11 |  2 | 81 | 111 | 16 |   5 | 811 | 20 |  3 |  10 | 102 | 81 |  21)");
+                printf("\n0 - VOLTAR PARA O MENU");
+
+                printf("\n\nEscolha um teste: ");
+                scanf("%d", &opcao2);
+
+                switch(opcao2) {
+                    case 1 : {
+                        int tests[] = {18,4,8,1,3,7,12,15,11,6,5,2,13,10,9,17};
+                        tests_functions(HASH, tests);
+                        break;
+                    }
+                    case 2 : {
+                        int tests[] = {84,13,1,3,7,12,15,11,6,5,2,18,10,9,17};
+                        tests_functions(HASH, tests);
+                        break;
+                    }
+                    case 3 : {
+                        int tests[] = {75,93,77,3,39,14,775,12,1,73,377,2,95,53};
+                        tests_functions(HASH, tests);
+                        break;
+                    }
+                    case 4 : {
+                        int tests[] = {79,78,18,1,797,98,3,79,21,97,2,25,49,897};
+                        tests_functions(HASH, tests);
+                        break;
+                    }
+                    case 5 : {
+                        int tests[] = {81,11,2,81,111,16,5,811,20,3,10,102,81,21};
+                        tests_functions(HASH, tests);
+                        break;
+                    }
+                    case 0 : {
+                        menu(HASH);
+                    }
+                    printf("\n\nVALORES INSERIDOS COM SUCESSO!!!\n");
+                    system("pause");
+                }
+                break;
 			}
 			case 0 : {
 				//sair
