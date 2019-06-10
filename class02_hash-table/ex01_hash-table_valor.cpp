@@ -96,11 +96,11 @@ void show_ordem_recursive(cad *raiz) {
 }
 
 //FUNCÇÃO DE TESTES
-void tests_functions(cad *HASH[MAX], int tests[]) {
+void tests_functions(cad *HASH[MAX], int tests[], int size) {
     int j;
-    int k = sizeof(tests);
-    printf("\n\n%i\n\n",k);
-    for(int i=0; i < sizeof(tests); i++) {
+//    int k = sizeof(tests);
+//    printf("\n\n%i\n\n",k);
+    for(int i=0; i < size; i++) {
         j = tests[i];
         hash_table(HASH, tests[i]);
     }
@@ -135,18 +135,17 @@ void menu(cad *HASH[MAX]) {
 				printf(":::::::::::::. INSERIR RECURSIVO .::::::::::::\n");
 				printf("::::::::::::::::::::::::::::::::::::::::::::::\n\n");
 				
-//				printf("Informe o valor: ");
-//				scanf("%d", &valor);
-//				printf("Informe o nome: ");
-//				fflush(stdin);
-//				gets(name);
-//
-//				hash_table(HASH, name);
-//				hash_table(HASH, valor);
+				printf("Informe o valor: ");
+				scanf("%d", &valor);
+				// printf("Informe o nome: ");
+				// fflush(stdin);
+				// gets(name);
+
+				// hash_table(HASH, name);
+				hash_table(HASH, valor);
 				
 				// AUTO INSERT
-                hash_table(HASH, 4); hash_table(HASH, 3); hash_table(HASH, 1);  hash_table(HASH, 6); hash_table(HASH, 7);
-                hash_table(HASH, 2); hash_table(HASH, 9); hash_table(HASH, 10); hash_table(HASH, 8); hash_table(HASH, 5);
+                // hash_table(HASH, 4);
 				break;
 			}
 			case 2 : {
@@ -173,7 +172,7 @@ void menu(cad *HASH[MAX]) {
                 system("cls");
                 printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
                 printf("::::::::::::::::::. VALORES DE TESTES .:::::::::::::::::\n");
-                printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n\n");
+                printf("::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
 
                 printf("\n1 - Teste 1 = (18 | 4  |  8 |  1 |   3 |  7 |  12 |  15 | 11 |  6 |   5 |   2 | 13 |  10 |  9 | 17)");
                 printf("\n2 - Teste 2 = (84 | 13 |  1 |  3 |   7 | 12 |  15 |  11 |  6 |  5 |   2 |  18 | 10 |   9 | 17)");
@@ -187,36 +186,37 @@ void menu(cad *HASH[MAX]) {
 
                 switch(opcao2) {
                     case 1 : {
-                        int tests[] = {18,4,8,1,3,7,12,15,11,6,5,2,13,10,9,17};
-                        tests_functions(HASH, tests);
+                        int size=16, tests[] = {18,4,8,1,3,7,12,15,11,6,5,2,13,10,9,17};
+                        tests_functions(HASH, tests, size);
                         break;
                     }
                     case 2 : {
-                        int tests[] = {84,13,1,3,7,12,15,11,6,5,2,18,10,9,17};
-                        tests_functions(HASH, tests);
+                        int size=15, tests[] = {84,13,1,3,7,12,15,11,6,5,2,18,10,9,17};
+                        tests_functions(HASH, tests, size);
                         break;
                     }
                     case 3 : {
-                        int tests[] = {75,93,77,3,39,14,775,12,1,73,377,2,95,53};
-                        tests_functions(HASH, tests);
+                        int size=14, tests[] = {75,93,77,3,39,14,775,12,1,73,377,2,95,53};
+                        tests_functions(HASH, tests, size);
                         break;
                     }
                     case 4 : {
-                        int tests[] = {79,78,18,1,797,98,3,79,21,97,2,25,49,897};
-                        tests_functions(HASH, tests);
+                        int size=14, tests[] = {79,78,18,1,797,98,3,79,21,97,2,25,49,897};
+                        tests_functions(HASH, tests, size);
                         break;
                     }
                     case 5 : {
-                        int tests[] = {81,11,2,81,111,16,5,811,20,3,10,102,81,21};
-                        tests_functions(HASH, tests);
+                        int size=14, tests[] = {81,11,2,81,111,16,5,811,20,3,10,102,81,21};
+                        tests_functions(HASH, tests, size);
                         break;
                     }
                     case 0 : {
                         menu(HASH);
                     }
-                    printf("\n\nVALORES INSERIDOS COM SUCESSO!!!\n");
-                    system("pause");
                 }
+                system("cls");
+                printf("VALORES INSERIDOS COM SUCESSO!!!\n\n");
+                system("pause");
                 break;
 			}
 			case 0 : {
